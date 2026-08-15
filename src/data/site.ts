@@ -223,7 +223,7 @@ export const stories: Story[] = [
     name: "A student in our learning programme",
     place: PLACEHOLDER,
     cause: "education",
-    challenge: "家 responsibilities and costs made continuing school uncertain.",
+    challenge: "Household responsibilities and costs made continuing school uncertain.",
     support: "Learning materials, coaching support and regular mentoring.",
     result: "Returned to consistent attendance and improved in class.",
     image: "education",
