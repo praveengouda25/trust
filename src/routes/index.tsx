@@ -9,6 +9,7 @@ import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { CauseCard, StoryCard, FeatureCard } from "@/components/cards";
 import { Button } from "@/components/ui/button";
 import { causes, impactStats, whyTrustUs, stories, org } from "@/data/site";
+import { getIcon } from "@/lib/icon-map";
 
 export const Route = createFileRoute("/")({
   head: () => ({
