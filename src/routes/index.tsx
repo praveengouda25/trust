@@ -90,7 +90,7 @@ function Index() {
           <SectionHeading eyebrow="Why trust us" title="Accountable in the details" />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {whyTrustUs.map((item, i) => (
-              <FeatureCard key={item.title} title={item.title} body={item.body} icon={item.icon} delay={i * 80} />
+              <FeatureCard key={item.title} title={item.title} body={item.body} Icon={getIcon(item.icon)} delay={i * 80} />
             ))}
           </div>
         </div>
