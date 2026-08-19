@@ -215,7 +215,7 @@ export type Story = {
   challenge: string;
   support: string;
   result: string;
-  image: "education" | "healthcare" | "food" | "women" | "community";
+  image: "storyStudent" | "storyFamily" | "foodDistribution" | "womenEnterprise" | "mentoring";
 };
 
 export const stories: Story[] = [
@@ -226,36 +226,37 @@ export const stories: Story[] = [
     challenge: "Household responsibilities and costs made continuing school uncertain.",
     support: "Learning materials, coaching support and regular mentoring.",
     result: "Returned to consistent attendance and improved in class.",
-    image: "education",
+    image: "storyStudent",
   },
   {
-    name: "An elder from a health camp",
+    name: "A child seen at a health camp",
     place: PLACEHOLDER,
     cause: "healthcare",
-    challenge: "Routine check-ups were out of reach due to distance and cost.",
-    support: "A local health camp, screening and follow-up guidance.",
-    result: "Ongoing condition identified early and managed with care.",
-    image: "healthcare",
+    challenge: "A recurring health problem went unchecked because care was far away.",
+    support: "A screening at our local child health camp, medicines and follow-up.",
+    result: "Treated early and back in school without missed weeks.",
+    image: "storyFamily",
   },
   {
     name: "A family supported during hardship",
     place: PLACEHOLDER,
     cause: "food-support",
-    challenge: "A sudden loss of income left the household without essentials.",
+    challenge: "A sudden loss of income left the children without regular meals.",
     support: "Ration kits and cooked meals through the difficult weeks.",
-    result: "The family stayed stable while returning to work.",
-    image: "food",
+    result: "The children kept eating well and stayed in school.",
+    image: "foodDistribution",
   },
   {
-    name: "A woman in our skills programme",
+    name: "A young woman in our skills programme",
     place: PLACEHOLDER,
     cause: "women-empowerment",
     challenge: "No independent income and limited access to training.",
     support: "Tailoring and enterprise training with peer group support.",
     result: "Began earning independently and now mentors new learners.",
-    image: "women",
+    image: "womenEnterprise",
   },
 ];
+
 
 export type Event = {
   slug: string;
