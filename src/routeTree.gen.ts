@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as AboutAchievementsRouteImport } from './routes/about.achievements'
+import { Route as AboutJourneyRouteImport } from './routes/about.journey'
+import { Route as AboutMissionRouteImport } from './routes/about.mission'
+import { Route as AboutSvrstTrustRouteImport } from './routes/about.svrst-trust'
+import { Route as AboutTeamRouteImport } from './routes/about.team'
+import { Route as WorkIndexRouteImport } from './routes/work.index'
+import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutAchievementsRoute = AboutAchievementsRouteImport.update({
+  id: '/about/achievements',
+  path: '/about/achievements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutJourneyRoute = AboutJourneyRouteImport.update({
+  id: '/about/journey',
+  path: '/about/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutMissionRoute = AboutMissionRouteImport.update({
+  id: '/about/mission',
+  path: '/about/mission',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutSvrstTrustRoute = AboutSvrstTrustRouteImport.update({
+  id: '/about/svrst-trust',
+  path: '/about/svrst-trust',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutTeamRoute = AboutTeamRouteImport.update({
+  id: '/about/team',
+  path: '/about/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkIndexRoute = WorkIndexRouteImport.update({
+  id: '/work/',
+  path: '/work/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkSlugRoute = WorkSlugRouteImport.update({
+  id: '/work/$slug',
+  path: '/work/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about/achievements': typeof AboutAchievementsRoute
+  '/about/journey': typeof AboutJourneyRoute
+  '/about/mission': typeof AboutMissionRoute
+  '/about/svrst-trust': typeof AboutSvrstTrustRoute
+  '/about/team': typeof AboutTeamRoute
+  '/work/$slug': typeof WorkSlugRoute
+  '/about/': typeof AboutIndexRoute
+  '/work/': typeof WorkIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about/achievements': typeof AboutAchievementsRoute
+  '/about/journey': typeof AboutJourneyRoute
+  '/about/mission': typeof AboutMissionRoute
+  '/about/svrst-trust': typeof AboutSvrstTrustRoute
+  '/about/team': typeof AboutTeamRoute
+  '/work/$slug': typeof WorkSlugRoute
+  '/about': typeof AboutIndexRoute
+  '/work': typeof WorkIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about/achievements': typeof AboutAchievementsRoute
+  '/about/journey': typeof AboutJourneyRoute
+  '/about/mission': typeof AboutMissionRoute
+  '/about/svrst-trust': typeof AboutSvrstTrustRoute
+  '/about/team': typeof AboutTeamRoute
+  '/work/$slug': typeof WorkSlugRoute
+  '/about/': typeof AboutIndexRoute
+  '/work/': typeof WorkIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about/achievements'
+    | '/about/journey'
+    | '/about/mission'
+    | '/about/svrst-trust'
+    | '/about/team'
+    | '/work/$slug'
+    | '/about/'
+    | '/work/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about/achievements'
+    | '/about/journey'
+    | '/about/mission'
+    | '/about/svrst-trust'
+    | '/about/team'
+    | '/work/$slug'
+    | '/about'
+    | '/work'
+  id:
+    | '__root__'
+    | '/'
+    | '/about/achievements'
+    | '/about/journey'
+    | '/about/mission'
+    | '/about/svrst-trust'
+    | '/about/team'
+    | '/work/$slug'
+    | '/about/'
+    | '/work/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutAchievementsRoute: typeof AboutAchievementsRoute
+  AboutJourneyRoute: typeof AboutJourneyRoute
+  AboutMissionRoute: typeof AboutMissionRoute
+  AboutSvrstTrustRoute: typeof AboutSvrstTrustRoute
+  AboutTeamRoute: typeof AboutTeamRoute
+  WorkSlugRoute: typeof WorkSlugRoute
+  AboutIndexRoute: typeof AboutIndexRoute
+  WorkIndexRoute: typeof WorkIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/achievements': {
+      id: '/about/achievements'
+      path: '/about/achievements'
+      fullPath: '/about/achievements'
+      preLoaderRoute: typeof AboutAchievementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/journey': {
+      id: '/about/journey'
+      path: '/about/journey'
+      fullPath: '/about/journey'
+      preLoaderRoute: typeof AboutJourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/mission': {
+      id: '/about/mission'
+      path: '/about/mission'
+      fullPath: '/about/mission'
+      preLoaderRoute: typeof AboutMissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/svrst-trust': {
+      id: '/about/svrst-trust'
+      path: '/about/svrst-trust'
+      fullPath: '/about/svrst-trust'
+      preLoaderRoute: typeof AboutSvrstTrustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/team': {
+      id: '/about/team'
+      path: '/about/team'
+      fullPath: '/about/team'
+      preLoaderRoute: typeof AboutTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/': {
+      id: '/work/'
+      path: '/work'
+      fullPath: '/work/'
+      preLoaderRoute: typeof WorkIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/$slug': {
+      id: '/work/$slug'
+      path: '/work/$slug'
+      fullPath: '/work/$slug'
+      preLoaderRoute: typeof WorkSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutAchievementsRoute: AboutAchievementsRoute,
+  AboutJourneyRoute: AboutJourneyRoute,
+  AboutMissionRoute: AboutMissionRoute,
+  AboutSvrstTrustRoute: AboutSvrstTrustRoute,
+  AboutTeamRoute: AboutTeamRoute,
+  WorkSlugRoute: WorkSlugRoute,
+  AboutIndexRoute: AboutIndexRoute,
+  WorkIndexRoute: WorkIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
