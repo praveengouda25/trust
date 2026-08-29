@@ -16,6 +16,14 @@ import { Route as AboutJourneyRouteImport } from './routes/about.journey'
 import { Route as AboutMissionRouteImport } from './routes/about.mission'
 import { Route as AboutSvrstTrustRouteImport } from './routes/about.svrst-trust'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
+import { Route as EventsIndexRouteImport } from './routes/events.index'
+import { Route as EventsPastRouteImport } from './routes/events.past'
+import { Route as EventsUpcomingRouteImport } from './routes/events.upcoming'
+import { Route as GetInvolvedIndexRouteImport } from './routes/get-involved.index'
+import { Route as GetInvolvedCorporatePartnershipRouteImport } from './routes/get-involved.corporate-partnership'
+import { Route as GetInvolvedMembershipRouteImport } from './routes/get-involved.membership'
+import { Route as GetInvolvedRequestHelpRouteImport } from './routes/get-involved.request-help'
+import { Route as GetInvolvedVolunteerRouteImport } from './routes/get-involved.volunteer'
 import { Route as WorkIndexRouteImport } from './routes/work.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 
@@ -54,6 +62,47 @@ const AboutTeamRoute = AboutTeamRouteImport.update({
   path: '/about/team',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsPastRoute = EventsPastRouteImport.update({
+  id: '/events/past',
+  path: '/events/past',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsUpcomingRoute = EventsUpcomingRouteImport.update({
+  id: '/events/upcoming',
+  path: '/events/upcoming',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetInvolvedIndexRoute = GetInvolvedIndexRouteImport.update({
+  id: '/get-involved/',
+  path: '/get-involved/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetInvolvedCorporatePartnershipRoute =
+  GetInvolvedCorporatePartnershipRouteImport.update({
+    id: '/get-involved/corporate-partnership',
+    path: '/get-involved/corporate-partnership',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GetInvolvedMembershipRoute = GetInvolvedMembershipRouteImport.update({
+  id: '/get-involved/membership',
+  path: '/get-involved/membership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetInvolvedRequestHelpRoute = GetInvolvedRequestHelpRouteImport.update({
+  id: '/get-involved/request-help',
+  path: '/get-involved/request-help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetInvolvedVolunteerRoute = GetInvolvedVolunteerRouteImport.update({
+  id: '/get-involved/volunteer',
+  path: '/get-involved/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkIndexRoute = WorkIndexRouteImport.update({
   id: '/work/',
   path: '/work/',
@@ -72,8 +121,16 @@ export interface FileRoutesByFullPath {
   '/about/mission': typeof AboutMissionRoute
   '/about/svrst-trust': typeof AboutSvrstTrustRoute
   '/about/team': typeof AboutTeamRoute
+  '/events/past': typeof EventsPastRoute
+  '/events/upcoming': typeof EventsUpcomingRoute
+  '/get-involved/corporate-partnership': typeof GetInvolvedCorporatePartnershipRoute
+  '/get-involved/membership': typeof GetInvolvedMembershipRoute
+  '/get-involved/request-help': typeof GetInvolvedRequestHelpRoute
+  '/get-involved/volunteer': typeof GetInvolvedVolunteerRoute
   '/work/$slug': typeof WorkSlugRoute
   '/about/': typeof AboutIndexRoute
+  '/events/': typeof EventsIndexRoute
+  '/get-involved/': typeof GetInvolvedIndexRoute
   '/work/': typeof WorkIndexRoute
 }
 export interface FileRoutesByTo {
@@ -83,8 +140,16 @@ export interface FileRoutesByTo {
   '/about/mission': typeof AboutMissionRoute
   '/about/svrst-trust': typeof AboutSvrstTrustRoute
   '/about/team': typeof AboutTeamRoute
+  '/events/past': typeof EventsPastRoute
+  '/events/upcoming': typeof EventsUpcomingRoute
+  '/get-involved/corporate-partnership': typeof GetInvolvedCorporatePartnershipRoute
+  '/get-involved/membership': typeof GetInvolvedMembershipRoute
+  '/get-involved/request-help': typeof GetInvolvedRequestHelpRoute
+  '/get-involved/volunteer': typeof GetInvolvedVolunteerRoute
   '/work/$slug': typeof WorkSlugRoute
   '/about': typeof AboutIndexRoute
+  '/events': typeof EventsIndexRoute
+  '/get-involved': typeof GetInvolvedIndexRoute
   '/work': typeof WorkIndexRoute
 }
 export interface FileRoutesById {
@@ -95,8 +160,16 @@ export interface FileRoutesById {
   '/about/mission': typeof AboutMissionRoute
   '/about/svrst-trust': typeof AboutSvrstTrustRoute
   '/about/team': typeof AboutTeamRoute
+  '/events/past': typeof EventsPastRoute
+  '/events/upcoming': typeof EventsUpcomingRoute
+  '/get-involved/corporate-partnership': typeof GetInvolvedCorporatePartnershipRoute
+  '/get-involved/membership': typeof GetInvolvedMembershipRoute
+  '/get-involved/request-help': typeof GetInvolvedRequestHelpRoute
+  '/get-involved/volunteer': typeof GetInvolvedVolunteerRoute
   '/work/$slug': typeof WorkSlugRoute
   '/about/': typeof AboutIndexRoute
+  '/events/': typeof EventsIndexRoute
+  '/get-involved/': typeof GetInvolvedIndexRoute
   '/work/': typeof WorkIndexRoute
 }
 export interface FileRouteTypes {
@@ -108,8 +181,16 @@ export interface FileRouteTypes {
     | '/about/mission'
     | '/about/svrst-trust'
     | '/about/team'
+    | '/events/past'
+    | '/events/upcoming'
+    | '/get-involved/corporate-partnership'
+    | '/get-involved/membership'
+    | '/get-involved/request-help'
+    | '/get-involved/volunteer'
     | '/work/$slug'
     | '/about/'
+    | '/events/'
+    | '/get-involved/'
     | '/work/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -119,8 +200,16 @@ export interface FileRouteTypes {
     | '/about/mission'
     | '/about/svrst-trust'
     | '/about/team'
+    | '/events/past'
+    | '/events/upcoming'
+    | '/get-involved/corporate-partnership'
+    | '/get-involved/membership'
+    | '/get-involved/request-help'
+    | '/get-involved/volunteer'
     | '/work/$slug'
     | '/about'
+    | '/events'
+    | '/get-involved'
     | '/work'
   id:
     | '__root__'
@@ -130,8 +219,16 @@ export interface FileRouteTypes {
     | '/about/mission'
     | '/about/svrst-trust'
     | '/about/team'
+    | '/events/past'
+    | '/events/upcoming'
+    | '/get-involved/corporate-partnership'
+    | '/get-involved/membership'
+    | '/get-involved/request-help'
+    | '/get-involved/volunteer'
     | '/work/$slug'
     | '/about/'
+    | '/events/'
+    | '/get-involved/'
     | '/work/'
   fileRoutesById: FileRoutesById
 }
@@ -142,8 +239,16 @@ export interface RootRouteChildren {
   AboutMissionRoute: typeof AboutMissionRoute
   AboutSvrstTrustRoute: typeof AboutSvrstTrustRoute
   AboutTeamRoute: typeof AboutTeamRoute
+  EventsPastRoute: typeof EventsPastRoute
+  EventsUpcomingRoute: typeof EventsUpcomingRoute
+  GetInvolvedCorporatePartnershipRoute: typeof GetInvolvedCorporatePartnershipRoute
+  GetInvolvedMembershipRoute: typeof GetInvolvedMembershipRoute
+  GetInvolvedRequestHelpRoute: typeof GetInvolvedRequestHelpRoute
+  GetInvolvedVolunteerRoute: typeof GetInvolvedVolunteerRoute
   WorkSlugRoute: typeof WorkSlugRoute
   AboutIndexRoute: typeof AboutIndexRoute
+  EventsIndexRoute: typeof EventsIndexRoute
+  GetInvolvedIndexRoute: typeof GetInvolvedIndexRoute
   WorkIndexRoute: typeof WorkIndexRoute
 }
 
@@ -198,6 +303,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutTeamRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/': {
+      id: '/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/past': {
+      id: '/events/past'
+      path: '/events/past'
+      fullPath: '/events/past'
+      preLoaderRoute: typeof EventsPastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/upcoming': {
+      id: '/events/upcoming'
+      path: '/events/upcoming'
+      fullPath: '/events/upcoming'
+      preLoaderRoute: typeof EventsUpcomingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-involved/': {
+      id: '/get-involved/'
+      path: '/get-involved'
+      fullPath: '/get-involved/'
+      preLoaderRoute: typeof GetInvolvedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-involved/corporate-partnership': {
+      id: '/get-involved/corporate-partnership'
+      path: '/get-involved/corporate-partnership'
+      fullPath: '/get-involved/corporate-partnership'
+      preLoaderRoute: typeof GetInvolvedCorporatePartnershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-involved/membership': {
+      id: '/get-involved/membership'
+      path: '/get-involved/membership'
+      fullPath: '/get-involved/membership'
+      preLoaderRoute: typeof GetInvolvedMembershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-involved/request-help': {
+      id: '/get-involved/request-help'
+      path: '/get-involved/request-help'
+      fullPath: '/get-involved/request-help'
+      preLoaderRoute: typeof GetInvolvedRequestHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-involved/volunteer': {
+      id: '/get-involved/volunteer'
+      path: '/get-involved/volunteer'
+      fullPath: '/get-involved/volunteer'
+      preLoaderRoute: typeof GetInvolvedVolunteerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/work/': {
       id: '/work/'
       path: '/work'
@@ -222,8 +383,16 @@ const rootRouteChildren: RootRouteChildren = {
   AboutMissionRoute: AboutMissionRoute,
   AboutSvrstTrustRoute: AboutSvrstTrustRoute,
   AboutTeamRoute: AboutTeamRoute,
+  EventsPastRoute: EventsPastRoute,
+  EventsUpcomingRoute: EventsUpcomingRoute,
+  GetInvolvedCorporatePartnershipRoute: GetInvolvedCorporatePartnershipRoute,
+  GetInvolvedMembershipRoute: GetInvolvedMembershipRoute,
+  GetInvolvedRequestHelpRoute: GetInvolvedRequestHelpRoute,
+  GetInvolvedVolunteerRoute: GetInvolvedVolunteerRoute,
   WorkSlugRoute: WorkSlugRoute,
   AboutIndexRoute: AboutIndexRoute,
+  EventsIndexRoute: EventsIndexRoute,
+  GetInvolvedIndexRoute: GetInvolvedIndexRoute,
   WorkIndexRoute: WorkIndexRoute,
 }
 export const routeTree = rootRouteImport
