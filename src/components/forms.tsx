@@ -12,6 +12,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
+const API_BASE_URL = import.meta.env["VITE_API_BASE_URL"] || "http://localhost:5000/api";
+
 export type FieldDef = {
   name: string;
   label: string;
@@ -30,6 +32,8 @@ export function AutoForm<T extends FieldValues>({
   successTitle = "Thank you — we've received your details.",
   successBody = "A member of the SVRST Trust team will get back to you shortly.",
   note,
+  submitTo,
+  toPayload,
 }: {
   schema: ZodType<T>;
   fields: FieldDef[];
@@ -38,8 +42,11 @@ export function AutoForm<T extends FieldValues>({
   successTitle?: string;
   successBody?: string;
   note?: string;
+  submitTo?: string;
+  toPayload?: (values: T) => unknown;
 }) {
   const [done, setDone] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -53,7 +60,7 @@ export function AutoForm<T extends FieldValues>({
 
   if (done) {
     return (
-      <div className="rounded-3xl border border-border bg-card p-8 text-center shadow-soft">
+      <div className="border-y border-primary/20 py-10 text-center">
         <span className="mx-auto grid size-14 place-items-center rounded-2xl gradient-leaf text-leaf-foreground">
           <CheckCircle2 className="size-7" />
         </span>
@@ -69,11 +76,37 @@ export function AutoForm<T extends FieldValues>({
   return (
     <form
       noValidate
-      onSubmit={handleSubmit(async () => {
-        await new Promise((r) => setTimeout(r, 700));
-        setDone(true);
-      })}
-      className="rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8"
+      onSubmit={handleSubmit(
+        async (values) => {
+          setSubmitError(null);
+          try {
+            if (submitTo) {
+              const response = await fetch(`${API_BASE_URL}${submitTo}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(toPayload ? toPayload(values) : values),
+              });
+              const result = (await response.json().catch(() => null)) as {
+                message?: string;
+              } | null;
+              if (!response.ok) {
+                throw new Error(
+                  result?.message || "We could not submit your details. Please try again.",
+                );
+              }
+            }
+            setDone(true);
+          } catch (error: unknown) {
+            setSubmitError(
+              error instanceof Error ? error.message : "Submission failed. Please try again.",
+            );
+          }
+        },
+        (validationErrors) => {
+          setSubmitError(validationErrors.root?.message?.toString() || null);
+        },
+      )}
+      className="border-y border-primary/20 py-8 sm:py-10"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         {fields.map((field) => {
@@ -83,10 +116,13 @@ export function AutoForm<T extends FieldValues>({
           return (
             <div
               key={field.name}
-              className={cn("space-y-2", (field.full || field.type === "textarea") && "sm:col-span-2")}
+              className={cn(
+                "space-y-2",
+                (field.full || field.type === "textarea") && "sm:col-span-2",
+              )}
             >
               {field.type === "checkbox" ? (
-                <div className="flex items-start gap-3 rounded-2xl bg-secondary/60 p-4">
+                <div className="flex items-start gap-3 border-t border-primary/15 pt-4">
                   <Checkbox
                     id={id}
                     checked={Boolean(watch(field.name as Path<T>))}
@@ -95,7 +131,10 @@ export function AutoForm<T extends FieldValues>({
                     }
                     aria-invalid={invalid}
                   />
-                  <Label htmlFor={id} className="text-sm font-normal leading-relaxed text-muted-foreground">
+                  <Label
+                    htmlFor={id}
+                    className="text-sm font-normal leading-relaxed text-muted-foreground"
+                  >
                     {field.label}
                   </Label>
                 </div>
@@ -135,7 +174,9 @@ export function AutoForm<T extends FieldValues>({
                   )}
                 </>
               )}
-              {field.hint && !error && <p className="text-xs text-muted-foreground">{field.hint}</p>}
+              {field.hint && !error && (
+                <p className="text-xs text-muted-foreground">{field.hint}</p>
+              )}
               {error && (
                 <p role="alert" className="text-xs font-medium text-destructive">
                   {error}
@@ -147,8 +188,19 @@ export function AutoForm<T extends FieldValues>({
       </div>
 
       {note && <p className="mt-6 text-xs leading-relaxed text-muted-foreground">{note}</p>}
+      {submitError && (
+        <p role="alert" className="mt-5 text-sm font-medium text-destructive">
+          {submitError}
+        </p>
+      )}
 
-      <Button type="submit" variant="donate" size="lg" className="mt-7 w-full sm:w-auto" disabled={isSubmitting}>
+      <Button
+        type="submit"
+        variant="donate"
+        size="lg"
+        className="mt-7 w-full sm:w-auto"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? <Loader2 className="animate-spin" /> : <Send />}
         {isSubmitting ? "Sending…" : submitLabel}
       </Button>

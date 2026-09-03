@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHero } from "@/components/PageHero";
+export const Route = createFileRoute("/policies/privacy")({ component: () => <Policy title="Privacy Policy" /> });
+function Policy({ title }: { title: string }) { return <><PageHero eyebrow="Policy" title={title} subtitle="How information shared through this website is handled." /><section className="py-20"><div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-5 text-sm leading-relaxed text-muted-foreground"><p>We collect only the information needed to respond to requests, registrations, messages and donations. Access is restricted to authorised administrators.</p><p>To ask about information you have submitted, please contact Mathrudhama Children’s Village at +91 95913 15639.</p></div></section></>; }

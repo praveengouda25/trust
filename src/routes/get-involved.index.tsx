@@ -9,13 +9,13 @@ import { images } from "@/lib/images";
 
 const paths = [
   {
-    to: "/get-involved/request-help",
+    to: "/request-help",
     label: "Request Help",
     body: "If you or a family you know needs education, health or food support, tell us and our team will reach out.",
     Icon: HandHeart,
   },
   {
-    to: "/get-involved/volunteer",
+    to: "/volunteer-registration",
     label: "Volunteer With Us",
     body: "Give time, skills or presence in the field. Volunteers run most of what we do on the ground.",
     Icon: HeartHandshake,
@@ -27,7 +27,7 @@ const paths = [
     Icon: IdCard,
   },
   {
-    to: "/get-involved/corporate-partnership",
+    to: "/corporate-partnership",
     label: "Corporate Partnership",
     body: "Partner with us on CSR programmes with clear reporting and measurable outcomes.",
     Icon: Building2,
@@ -44,7 +44,10 @@ export const Route = createFileRoute("/get-involved/")({
           "Volunteer, become a member, request help or start a corporate partnership with SVRST Trust. Every role helps children and families.",
       },
       { property: "og:title", content: "Get Involved with SVRST Trust" },
-      { property: "og:description", content: "Volunteer, become a member, request help or partner with SVRST Trust." },
+      {
+        property: "og:description",
+        content: "Volunteer, become a member, request help or partner with SVRST Trust.",
+      },
       { property: "og:url", content: "/get-involved" },
     ],
     links: [{ rel: "canonical", href: "/get-involved" }],
@@ -78,7 +81,9 @@ function GetInvolvedIndex() {
                     <p.Icon className="size-5" />
                   </span>
                   <h3 className="mt-5 font-display text-xl font-semibold">{p.label}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {p.body}
+                  </p>
                   <Button asChild variant="outline" className="mt-6 self-start">
                     <Link to={p.to}>
                       {p.label}

@@ -15,6 +15,13 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+.env
+.lovable/
+*.download
+public/gallery/Instagram.html
+public/gallery/Instagram_files/
+svrst_Gallery/Instagram.html
+svrst_Gallery/Instagram_files/
 
 # Wrangler / Cloudflare
 .wrangler/

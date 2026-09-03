@@ -17,7 +17,10 @@ export const Route = createFileRoute("/events/upcoming")({
           "Upcoming SVRST Trust health camps, school kit distributions and skills workshops. See dates, places available and register online.",
       },
       { property: "og:title", content: "Upcoming SVRST Trust Events" },
-      { property: "og:description", content: "Dates, locations and registration for our next community events." },
+      {
+        property: "og:description",
+        content: "Dates, locations and registration for our next community events.",
+      },
       { property: "og:url", content: "/events/upcoming" },
     ],
     links: [{ rel: "canonical", href: "/events/upcoming" }],
@@ -53,7 +56,7 @@ function UpcomingEvents() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/get-involved/volunteer">Volunteer at an Event</Link>
+              <Link to="/volunteer-registration">Volunteer at an Event</Link>
             </Button>
           </div>
         </div>

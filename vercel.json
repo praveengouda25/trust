@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm install && npm install --prefix latest_ERP",
+  "buildCommand": "npm run build && node scripts/prepare-vercel.mjs",
+  "outputDirectory": "dist/deploy",
+  "rewrites": [
+    { "source": "/erp/:path*", "destination": "/erp/index.html" },
+    { "source": "/:path*", "destination": "/index.html" }
+  ]
+}

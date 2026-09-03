@@ -7,26 +7,22 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
 import { AutoForm, type FieldDef } from "@/components/forms";
 import { images } from "@/lib/images";
-import { PLACEHOLDER } from "@/data/site";
 
 const tiers = [
   {
     name: "Supporting Member",
     price: "Annual contribution",
-    note: PLACEHOLDER,
     perks: ["Programme updates", "Invitations to events", "Annual impact summary"],
   },
   {
     name: "Patron Member",
     price: "Annual contribution",
-    note: PLACEHOLDER,
     perks: ["Everything in Supporting", "Named support for a programme", "Field visit invitations"],
     featured: true,
   },
   {
     name: "Life Member",
     price: "One-time contribution",
-    note: PLACEHOLDER,
     perks: ["Lifetime membership", "Advisory participation", "Recognition in reports"],
   },
 ];
@@ -120,7 +116,6 @@ function MembershipPage() {
                   )}
                   <h3 className="font-display text-xl font-semibold">{tier.name}</h3>
                   <p className="mt-1 text-sm font-medium text-accent">{tier.price}</p>
-                  <p className="mt-2 text-xs text-muted-foreground">{tier.note}</p>
                   <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
                     {tier.perks.map((perk) => (
                       <li key={perk} className="flex items-start gap-2">
@@ -155,6 +150,8 @@ function MembershipPage() {
               submitLabel="Apply for Membership"
               successTitle="Thank you for applying for membership."
               successBody="We'll contact you with the membership details and contribution options."
+              submitTo="/public/applications"
+              toPayload={(values) => ({ type: "MEMBERSHIP", data: values })}
             />
           </div>
         </div>

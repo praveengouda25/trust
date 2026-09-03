@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHero } from "@/components/PageHero";
+export const Route = createFileRoute("/policies/terms")({ component: () => <><PageHero eyebrow="Policy" title="Terms & Conditions" subtitle="Guidance for using this website and contacting Mathrudhama Children’s Village." /><section className="py-20"><div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-sm leading-relaxed text-muted-foreground"><p>This website provides information about Mathrudhama Children’s Village, its programmes and ways to connect. Please use the contact and registration forms respectfully and provide accurate information.</p></div></section></> });

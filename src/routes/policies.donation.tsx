@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHero } from "@/components/PageHero";
+export const Route = createFileRoute("/policies/donation")({ component: () => <><PageHero eyebrow="Policy" title="Donation Policy" subtitle="A clear record of every contribution helps sustain trust." /><section className="py-20"><div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-sm leading-relaxed text-muted-foreground"><p>Donation submissions are recorded for review. Contributions are treated as pending until the payment or transfer is verified by an authorised administrator.</p><p className="mt-4">For donation questions, please contact Mathrudhama Children’s Village directly.</p></div></section></> });

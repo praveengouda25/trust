@@ -1,0 +1,99 @@
+-- Seed sample students for testing
+-- This migration creates 10 realistic sample student records
+
+-- First, ensure we have a branch and hostel to reference
+-- These IDs should be replaced with actual IDs from your database
+DO $$
+DECLARE
+  v_branch_id uuid;
+  v_hostel_id uuid;
+  v_building_id uuid;
+  v_floor_id uuid;
+  v_room_id uuid;
+  v_bed_id uuid;
+  v_admin_id uuid;
+  v_trust_id uuid;
+BEGIN
+  -- Get the first profile ID (admin/super admin)
+  SELECT id INTO v_admin_id FROM profiles WHERE email = 'praveengoudru25@gmail.com' LIMIT 1;
+  
+  IF v_admin_id IS NULL THEN
+    SELECT id INTO v_admin_id FROM profiles LIMIT 1;
+  END IF;
+  
+  -- Get the first trust ID
+  SELECT id INTO v_trust_id FROM trusts LIMIT 1;
+  
+  -- Get or create a branch
+  SELECT id INTO v_branch_id FROM branches WHERE code = 'MAIN' LIMIT 1;
+  
+  IF v_branch_id IS NULL THEN
+    INSERT INTO branches (trust_id, name, code, city, state, address, contact_phone, created_by)
+    VALUES (
+      v_trust_id,
+      'Main Branch',
+      'MAIN',
+      'Bangalore',
+      'Karnataka',
+      '123 Main Street',
+      '+91-9876543210',
+      v_admin_id
+    )
+    RETURNING id INTO v_branch_id;
+  END IF;
+  
+  -- Get or create a hostel
+  SELECT id INTO v_hostel_id FROM hostels WHERE branch_id = v_branch_id AND name = 'Main Hostel' LIMIT 1;
+  
+  IF v_hostel_id IS NULL THEN
+    INSERT INTO hostels (branch_id, name, code, address, capacity, created_by)
+    VALUES (
+      v_branch_id,
+      'Main Hostel',
+      'MH001',
+      'Hostel Building, Campus',
+      200,
+      v_admin_id
+    )
+    RETURNING id INTO v_hostel_id;
+  END IF;
+  
+  -- Create building
+  INSERT INTO buildings (branch_id, hostel_id, name, code, created_by)
+  VALUES (v_branch_id, v_hostel_id, 'Building A', 'BLD-A', v_admin_id)
+  RETURNING id INTO v_building_id;
+  
+  -- Create floor
+  INSERT INTO floors (branch_id, building_id, name, level, created_by)
+  VALUES (v_branch_id, v_building_id, 'Ground Floor', 0, v_admin_id)
+  RETURNING id INTO v_floor_id;
+  
+  -- Create room
+  INSERT INTO rooms (branch_id, hostel_id, floor_id, room_number, capacity, created_by)
+  VALUES (v_branch_id, v_hostel_id, v_floor_id, '101', 4, v_admin_id)
+  RETURNING id INTO v_room_id;
+  
+  -- Create beds
+  INSERT INTO beds (branch_id, hostel_id, room_id, bed_number, status, created_by)
+  VALUES 
+    (v_branch_id, v_hostel_id, v_room_id, '1', 'available', v_admin_id),
+    (v_branch_id, v_hostel_id, v_room_id, '2', 'available', v_admin_id),
+    (v_branch_id, v_hostel_id, v_room_id, '3', 'available', v_admin_id),
+    (v_branch_id, v_hostel_id, v_room_id, '4', 'available', v_admin_id)
+  RETURNING id INTO v_bed_id;
+  
+  -- Insert sample students
+  INSERT INTO students (branch_id, hostel_id, admission_number, first_name, last_name, gender, date_of_birth, photo_url, phone, email, address, class_grade, blood_group, status, admission_date, created_by) VALUES
+    (v_branch_id, v_hostel_id, 'ADM-2026-000001', 'Rahul', 'Sharma', 'male', '2006-05-15', NULL, '+91-9876543211', 'rahul.sharma@example.com', '123 MG Road, Bangalore', '10th Grade', 'B+', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000002', 'Priya', 'Patel', 'female', '2006-08-22', NULL, '+91-9876543212', 'priya.patel@example.com', '456 Brigade Road, Bangalore', '10th Grade', 'O+', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000003', 'Arjun', 'Singh', 'male', '2005-12-10', NULL, '+91-9876543213', 'arjun.singh@example.com', '789 Residency Road, Bangalore', '11th Grade', 'A+', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000004', 'Sneha', 'Reddy', 'female', '2006-03-18', NULL, '+91-9876543214', 'sneha.reddy@example.com', '321 Commercial Street, Bangalore', '10th Grade', 'AB+', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000005', 'Vikram', 'Kumar', 'male', '2005-09-25', NULL, '+91-9876543215', 'vikram.kumar@example.com', '654 Infantry Road, Bangalore', '11th Grade', 'B-', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000006', 'Ananya', 'Gupta', 'female', '2006-11-30', NULL, '+91-9876543216', 'ananya.gupta@example.com', '987 Church Street, Bangalore', '10th Grade', 'A-', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000007', 'Karthik', 'Rajan', 'male', '2005-07-08', NULL, '+91-9876543217', 'karthik.rajan@example.com', '147 Richmond Road, Bangalore', '11th Grade', 'O-', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000008', 'Divya', 'Nair', 'female', '2006-04-12', NULL, '+91-9876543218', 'divya.nair@example.com', '258 Cunningham Road, Bangalore', '10th Grade', 'B+', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000009', 'Rohit', 'Verma', 'male', '2005-10-05', NULL, '+91-9876543219', 'rohit.verma@example.com', '369 Lavelle Road, Bangalore', '11th Grade', 'A+', 'active', '2024-06-01', v_admin_id),
+    (v_branch_id, v_hostel_id, 'ADM-2026-000010', 'Meera', 'Iyer', 'female', '2006-06-20', NULL, '+91-9876543220', 'meera.iyer@example.com', '741 Vittal Mallya Road, Bangalore', '10th Grade', 'AB-', 'active', '2024-06-01', v_admin_id);
+  
+  RAISE NOTICE 'Sample students seeded successfully';
+END $$;

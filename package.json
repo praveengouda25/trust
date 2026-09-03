@@ -1,11 +1,13 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "svrst-website",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
+    "dev": "node scripts/dev.mjs",
+    "build": "npm run build:website && npm run build:erp",
+    "build:website": "vite build",
+    "build:erp": "npm run build --prefix latest_ERP",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
@@ -67,7 +69,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@lovable.dev/vite-tanstack-config": "^2.14.0",
     "@types/node": "^22.16.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

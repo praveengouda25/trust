@@ -10,26 +10,81 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CorporatePartnershipRouteImport } from './routes/corporate-partnership'
+import { Route as DhyanaYogaRouteImport } from './routes/dhyana-yoga'
+import { Route as DonateRouteImport } from './routes/donate'
+import { Route as EducationRouteImport } from './routes/education'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as RequestHelpRouteImport } from './routes/request-help'
+import { Route as SportsRouteImport } from './routes/sports'
+import { Route as VolunteerRegistrationRouteImport } from './routes/volunteer-registration'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutAchievementsRouteImport } from './routes/about.achievements'
 import { Route as AboutJourneyRouteImport } from './routes/about.journey'
 import { Route as AboutMissionRouteImport } from './routes/about.mission'
 import { Route as AboutSvrstTrustRouteImport } from './routes/about.svrst-trust'
-import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
+import { Route as EventsGalleryRouteImport } from './routes/events.gallery'
 import { Route as EventsPastRouteImport } from './routes/events.past'
+import { Route as EventsRegisterRouteImport } from './routes/events.register'
 import { Route as EventsUpcomingRouteImport } from './routes/events.upcoming'
 import { Route as GetInvolvedIndexRouteImport } from './routes/get-involved.index'
-import { Route as GetInvolvedCorporatePartnershipRouteImport } from './routes/get-involved.corporate-partnership'
 import { Route as GetInvolvedMembershipRouteImport } from './routes/get-involved.membership'
-import { Route as GetInvolvedRequestHelpRouteImport } from './routes/get-involved.request-help'
-import { Route as GetInvolvedVolunteerRouteImport } from './routes/get-involved.volunteer'
+import { Route as PoliciesDonationRouteImport } from './routes/policies.donation'
+import { Route as PoliciesPrivacyRouteImport } from './routes/policies.privacy'
+import { Route as PoliciesTermsRouteImport } from './routes/policies.terms'
 import { Route as WorkIndexRouteImport } from './routes/work.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporatePartnershipRoute = CorporatePartnershipRouteImport.update({
+  id: '/corporate-partnership',
+  path: '/corporate-partnership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DhyanaYogaRoute = DhyanaYogaRouteImport.update({
+  id: '/dhyana-yoga',
+  path: '/dhyana-yoga',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateRoute = DonateRouteImport.update({
+  id: '/donate',
+  path: '/donate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationRoute = EducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestHelpRoute = RequestHelpRouteImport.update({
+  id: '/request-help',
+  path: '/request-help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SportsRoute = SportsRouteImport.update({
+  id: '/sports',
+  path: '/sports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VolunteerRegistrationRoute = VolunteerRegistrationRouteImport.update({
+  id: '/volunteer-registration',
+  path: '/volunteer-registration',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -57,19 +112,24 @@ const AboutSvrstTrustRoute = AboutSvrstTrustRouteImport.update({
   path: '/about/svrst-trust',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutTeamRoute = AboutTeamRouteImport.update({
-  id: '/about/team',
-  path: '/about/team',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EventsIndexRoute = EventsIndexRouteImport.update({
   id: '/events/',
   path: '/events/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsGalleryRoute = EventsGalleryRouteImport.update({
+  id: '/events/gallery',
+  path: '/events/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventsPastRoute = EventsPastRouteImport.update({
   id: '/events/past',
   path: '/events/past',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRegisterRoute = EventsRegisterRouteImport.update({
+  id: '/events/register',
+  path: '/events/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsUpcomingRoute = EventsUpcomingRouteImport.update({
@@ -82,25 +142,24 @@ const GetInvolvedIndexRoute = GetInvolvedIndexRouteImport.update({
   path: '/get-involved/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GetInvolvedCorporatePartnershipRoute =
-  GetInvolvedCorporatePartnershipRouteImport.update({
-    id: '/get-involved/corporate-partnership',
-    path: '/get-involved/corporate-partnership',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const GetInvolvedMembershipRoute = GetInvolvedMembershipRouteImport.update({
   id: '/get-involved/membership',
   path: '/get-involved/membership',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GetInvolvedRequestHelpRoute = GetInvolvedRequestHelpRouteImport.update({
-  id: '/get-involved/request-help',
-  path: '/get-involved/request-help',
+const PoliciesDonationRoute = PoliciesDonationRouteImport.update({
+  id: '/policies/donation',
+  path: '/policies/donation',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GetInvolvedVolunteerRoute = GetInvolvedVolunteerRouteImport.update({
-  id: '/get-involved/volunteer',
-  path: '/get-involved/volunteer',
+const PoliciesPrivacyRoute = PoliciesPrivacyRouteImport.update({
+  id: '/policies/privacy',
+  path: '/policies/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesTermsRoute = PoliciesTermsRouteImport.update({
+  id: '/policies/terms',
+  path: '/policies/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkIndexRoute = WorkIndexRouteImport.update({
@@ -116,17 +175,27 @@ const WorkSlugRoute = WorkSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/corporate-partnership': typeof CorporatePartnershipRoute
+  '/dhyana-yoga': typeof DhyanaYogaRoute
+  '/donate': typeof DonateRoute
+  '/education': typeof EducationRoute
+  '/login': typeof LoginRoute
+  '/request-help': typeof RequestHelpRoute
+  '/sports': typeof SportsRoute
+  '/volunteer-registration': typeof VolunteerRegistrationRoute
   '/about/achievements': typeof AboutAchievementsRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/mission': typeof AboutMissionRoute
   '/about/svrst-trust': typeof AboutSvrstTrustRoute
-  '/about/team': typeof AboutTeamRoute
+  '/events/gallery': typeof EventsGalleryRoute
   '/events/past': typeof EventsPastRoute
+  '/events/register': typeof EventsRegisterRoute
   '/events/upcoming': typeof EventsUpcomingRoute
-  '/get-involved/corporate-partnership': typeof GetInvolvedCorporatePartnershipRoute
   '/get-involved/membership': typeof GetInvolvedMembershipRoute
-  '/get-involved/request-help': typeof GetInvolvedRequestHelpRoute
-  '/get-involved/volunteer': typeof GetInvolvedVolunteerRoute
+  '/policies/donation': typeof PoliciesDonationRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/work/$slug': typeof WorkSlugRoute
   '/about/': typeof AboutIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -135,17 +204,27 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/corporate-partnership': typeof CorporatePartnershipRoute
+  '/dhyana-yoga': typeof DhyanaYogaRoute
+  '/donate': typeof DonateRoute
+  '/education': typeof EducationRoute
+  '/login': typeof LoginRoute
+  '/request-help': typeof RequestHelpRoute
+  '/sports': typeof SportsRoute
+  '/volunteer-registration': typeof VolunteerRegistrationRoute
   '/about/achievements': typeof AboutAchievementsRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/mission': typeof AboutMissionRoute
   '/about/svrst-trust': typeof AboutSvrstTrustRoute
-  '/about/team': typeof AboutTeamRoute
+  '/events/gallery': typeof EventsGalleryRoute
   '/events/past': typeof EventsPastRoute
+  '/events/register': typeof EventsRegisterRoute
   '/events/upcoming': typeof EventsUpcomingRoute
-  '/get-involved/corporate-partnership': typeof GetInvolvedCorporatePartnershipRoute
   '/get-involved/membership': typeof GetInvolvedMembershipRoute
-  '/get-involved/request-help': typeof GetInvolvedRequestHelpRoute
-  '/get-involved/volunteer': typeof GetInvolvedVolunteerRoute
+  '/policies/donation': typeof PoliciesDonationRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/work/$slug': typeof WorkSlugRoute
   '/about': typeof AboutIndexRoute
   '/events': typeof EventsIndexRoute
@@ -155,17 +234,27 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/corporate-partnership': typeof CorporatePartnershipRoute
+  '/dhyana-yoga': typeof DhyanaYogaRoute
+  '/donate': typeof DonateRoute
+  '/education': typeof EducationRoute
+  '/login': typeof LoginRoute
+  '/request-help': typeof RequestHelpRoute
+  '/sports': typeof SportsRoute
+  '/volunteer-registration': typeof VolunteerRegistrationRoute
   '/about/achievements': typeof AboutAchievementsRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/mission': typeof AboutMissionRoute
   '/about/svrst-trust': typeof AboutSvrstTrustRoute
-  '/about/team': typeof AboutTeamRoute
+  '/events/gallery': typeof EventsGalleryRoute
   '/events/past': typeof EventsPastRoute
+  '/events/register': typeof EventsRegisterRoute
   '/events/upcoming': typeof EventsUpcomingRoute
-  '/get-involved/corporate-partnership': typeof GetInvolvedCorporatePartnershipRoute
   '/get-involved/membership': typeof GetInvolvedMembershipRoute
-  '/get-involved/request-help': typeof GetInvolvedRequestHelpRoute
-  '/get-involved/volunteer': typeof GetInvolvedVolunteerRoute
+  '/policies/donation': typeof PoliciesDonationRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
+  '/policies/terms': typeof PoliciesTermsRoute
   '/work/$slug': typeof WorkSlugRoute
   '/about/': typeof AboutIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -176,17 +265,27 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/contact'
+    | '/corporate-partnership'
+    | '/dhyana-yoga'
+    | '/donate'
+    | '/education'
+    | '/login'
+    | '/request-help'
+    | '/sports'
+    | '/volunteer-registration'
     | '/about/achievements'
     | '/about/journey'
     | '/about/mission'
     | '/about/svrst-trust'
-    | '/about/team'
+    | '/events/gallery'
     | '/events/past'
+    | '/events/register'
     | '/events/upcoming'
-    | '/get-involved/corporate-partnership'
     | '/get-involved/membership'
-    | '/get-involved/request-help'
-    | '/get-involved/volunteer'
+    | '/policies/donation'
+    | '/policies/privacy'
+    | '/policies/terms'
     | '/work/$slug'
     | '/about/'
     | '/events/'
@@ -195,17 +294,27 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/contact'
+    | '/corporate-partnership'
+    | '/dhyana-yoga'
+    | '/donate'
+    | '/education'
+    | '/login'
+    | '/request-help'
+    | '/sports'
+    | '/volunteer-registration'
     | '/about/achievements'
     | '/about/journey'
     | '/about/mission'
     | '/about/svrst-trust'
-    | '/about/team'
+    | '/events/gallery'
     | '/events/past'
+    | '/events/register'
     | '/events/upcoming'
-    | '/get-involved/corporate-partnership'
     | '/get-involved/membership'
-    | '/get-involved/request-help'
-    | '/get-involved/volunteer'
+    | '/policies/donation'
+    | '/policies/privacy'
+    | '/policies/terms'
     | '/work/$slug'
     | '/about'
     | '/events'
@@ -214,17 +323,27 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/contact'
+    | '/corporate-partnership'
+    | '/dhyana-yoga'
+    | '/donate'
+    | '/education'
+    | '/login'
+    | '/request-help'
+    | '/sports'
+    | '/volunteer-registration'
     | '/about/achievements'
     | '/about/journey'
     | '/about/mission'
     | '/about/svrst-trust'
-    | '/about/team'
+    | '/events/gallery'
     | '/events/past'
+    | '/events/register'
     | '/events/upcoming'
-    | '/get-involved/corporate-partnership'
     | '/get-involved/membership'
-    | '/get-involved/request-help'
-    | '/get-involved/volunteer'
+    | '/policies/donation'
+    | '/policies/privacy'
+    | '/policies/terms'
     | '/work/$slug'
     | '/about/'
     | '/events/'
@@ -234,17 +353,27 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  CorporatePartnershipRoute: typeof CorporatePartnershipRoute
+  DhyanaYogaRoute: typeof DhyanaYogaRoute
+  DonateRoute: typeof DonateRoute
+  EducationRoute: typeof EducationRoute
+  LoginRoute: typeof LoginRoute
+  RequestHelpRoute: typeof RequestHelpRoute
+  SportsRoute: typeof SportsRoute
+  VolunteerRegistrationRoute: typeof VolunteerRegistrationRoute
   AboutAchievementsRoute: typeof AboutAchievementsRoute
   AboutJourneyRoute: typeof AboutJourneyRoute
   AboutMissionRoute: typeof AboutMissionRoute
   AboutSvrstTrustRoute: typeof AboutSvrstTrustRoute
-  AboutTeamRoute: typeof AboutTeamRoute
+  EventsGalleryRoute: typeof EventsGalleryRoute
   EventsPastRoute: typeof EventsPastRoute
+  EventsRegisterRoute: typeof EventsRegisterRoute
   EventsUpcomingRoute: typeof EventsUpcomingRoute
-  GetInvolvedCorporatePartnershipRoute: typeof GetInvolvedCorporatePartnershipRoute
   GetInvolvedMembershipRoute: typeof GetInvolvedMembershipRoute
-  GetInvolvedRequestHelpRoute: typeof GetInvolvedRequestHelpRoute
-  GetInvolvedVolunteerRoute: typeof GetInvolvedVolunteerRoute
+  PoliciesDonationRoute: typeof PoliciesDonationRoute
+  PoliciesPrivacyRoute: typeof PoliciesPrivacyRoute
+  PoliciesTermsRoute: typeof PoliciesTermsRoute
   WorkSlugRoute: typeof WorkSlugRoute
   AboutIndexRoute: typeof AboutIndexRoute
   EventsIndexRoute: typeof EventsIndexRoute
@@ -259,6 +388,69 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-partnership': {
+      id: '/corporate-partnership'
+      path: '/corporate-partnership'
+      fullPath: '/corporate-partnership'
+      preLoaderRoute: typeof CorporatePartnershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dhyana-yoga': {
+      id: '/dhyana-yoga'
+      path: '/dhyana-yoga'
+      fullPath: '/dhyana-yoga'
+      preLoaderRoute: typeof DhyanaYogaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate': {
+      id: '/donate'
+      path: '/donate'
+      fullPath: '/donate'
+      preLoaderRoute: typeof DonateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education': {
+      id: '/education'
+      path: '/education'
+      fullPath: '/education'
+      preLoaderRoute: typeof EducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-help': {
+      id: '/request-help'
+      path: '/request-help'
+      fullPath: '/request-help'
+      preLoaderRoute: typeof RequestHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sports': {
+      id: '/sports'
+      path: '/sports'
+      fullPath: '/sports'
+      preLoaderRoute: typeof SportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/volunteer-registration': {
+      id: '/volunteer-registration'
+      path: '/volunteer-registration'
+      fullPath: '/volunteer-registration'
+      preLoaderRoute: typeof VolunteerRegistrationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -296,13 +488,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutSvrstTrustRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about/team': {
-      id: '/about/team'
-      path: '/about/team'
-      fullPath: '/about/team'
-      preLoaderRoute: typeof AboutTeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/events/': {
       id: '/events/'
       path: '/events'
@@ -310,11 +495,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/gallery': {
+      id: '/events/gallery'
+      path: '/events/gallery'
+      fullPath: '/events/gallery'
+      preLoaderRoute: typeof EventsGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/events/past': {
       id: '/events/past'
       path: '/events/past'
       fullPath: '/events/past'
       preLoaderRoute: typeof EventsPastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/register': {
+      id: '/events/register'
+      path: '/events/register'
+      fullPath: '/events/register'
+      preLoaderRoute: typeof EventsRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events/upcoming': {
@@ -331,13 +530,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GetInvolvedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/get-involved/corporate-partnership': {
-      id: '/get-involved/corporate-partnership'
-      path: '/get-involved/corporate-partnership'
-      fullPath: '/get-involved/corporate-partnership'
-      preLoaderRoute: typeof GetInvolvedCorporatePartnershipRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/get-involved/membership': {
       id: '/get-involved/membership'
       path: '/get-involved/membership'
@@ -345,18 +537,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GetInvolvedMembershipRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/get-involved/request-help': {
-      id: '/get-involved/request-help'
-      path: '/get-involved/request-help'
-      fullPath: '/get-involved/request-help'
-      preLoaderRoute: typeof GetInvolvedRequestHelpRouteImport
+    '/policies/donation': {
+      id: '/policies/donation'
+      path: '/policies/donation'
+      fullPath: '/policies/donation'
+      preLoaderRoute: typeof PoliciesDonationRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/get-involved/volunteer': {
-      id: '/get-involved/volunteer'
-      path: '/get-involved/volunteer'
-      fullPath: '/get-involved/volunteer'
-      preLoaderRoute: typeof GetInvolvedVolunteerRouteImport
+    '/policies/privacy': {
+      id: '/policies/privacy'
+      path: '/policies/privacy'
+      fullPath: '/policies/privacy'
+      preLoaderRoute: typeof PoliciesPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/terms': {
+      id: '/policies/terms'
+      path: '/policies/terms'
+      fullPath: '/policies/terms'
+      preLoaderRoute: typeof PoliciesTermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work/': {
@@ -378,17 +577,27 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  CorporatePartnershipRoute: CorporatePartnershipRoute,
+  DhyanaYogaRoute: DhyanaYogaRoute,
+  DonateRoute: DonateRoute,
+  EducationRoute: EducationRoute,
+  LoginRoute: LoginRoute,
+  RequestHelpRoute: RequestHelpRoute,
+  SportsRoute: SportsRoute,
+  VolunteerRegistrationRoute: VolunteerRegistrationRoute,
   AboutAchievementsRoute: AboutAchievementsRoute,
   AboutJourneyRoute: AboutJourneyRoute,
   AboutMissionRoute: AboutMissionRoute,
   AboutSvrstTrustRoute: AboutSvrstTrustRoute,
-  AboutTeamRoute: AboutTeamRoute,
+  EventsGalleryRoute: EventsGalleryRoute,
   EventsPastRoute: EventsPastRoute,
+  EventsRegisterRoute: EventsRegisterRoute,
   EventsUpcomingRoute: EventsUpcomingRoute,
-  GetInvolvedCorporatePartnershipRoute: GetInvolvedCorporatePartnershipRoute,
   GetInvolvedMembershipRoute: GetInvolvedMembershipRoute,
-  GetInvolvedRequestHelpRoute: GetInvolvedRequestHelpRoute,
-  GetInvolvedVolunteerRoute: GetInvolvedVolunteerRoute,
+  PoliciesDonationRoute: PoliciesDonationRoute,
+  PoliciesPrivacyRoute: PoliciesPrivacyRoute,
+  PoliciesTermsRoute: PoliciesTermsRoute,
   WorkSlugRoute: WorkSlugRoute,
   AboutIndexRoute: AboutIndexRoute,
   EventsIndexRoute: EventsIndexRoute,

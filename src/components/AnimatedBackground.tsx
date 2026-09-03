@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type Variant = "orbs" | "particles" | "shapes" | "grid" | "waves" | "glow";
+type Variant = "orbs" | "particles" | "shapes" | "grid" | "waves" | "glow" | "ambient";
 
 /**
  * Reusable decorative backgrounds. Purely presentational, always behind content,
@@ -27,6 +27,15 @@ export function AnimatedBackground({
 
       {variant === "glow" && (
         <div className="absolute left-1/2 top-1/2 size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember/12 blur-3xl float-slow" />
+      )}
+
+      {variant === "ambient" && (
+        <>
+          <div className="ambient-orb ambient-orb-one" />
+          <div className="ambient-orb ambient-orb-two" />
+          <div className="ambient-orb ambient-orb-three" />
+          <div className="ambient-grid" />
+        </>
       )}
 
       {variant === "particles" && (

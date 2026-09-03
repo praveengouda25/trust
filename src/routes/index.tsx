@@ -1,29 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, HeartHandshake, Users, HandHeart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { HeroSlider } from "@/components/HeroSlider";
+import { VideoSection } from "@/components/VideoSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
-import { ImpactCounter } from "@/components/ImpactCounter";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { CauseCard, StoryCard, FeatureCard } from "@/components/cards";
 import { Button } from "@/components/ui/button";
-import { causes, impactStats, whyTrustUs, stories, org } from "@/data/site";
-import { getIcon } from "@/lib/icon-map";
+import { org } from "@/data/site";
+import { images } from "@/lib/images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SVRST Trust — Real People. Real Impact. Real Change." },
+      { title: "Mathrudhama Children's Home — SVRST" },
       {
         name: "description",
         content:
-          "SVRST Trust supports communities through education, healthcare, food support and women empowerment. Donate, volunteer, or request help today.",
+          "Mathrudhama Children's Home — SVRST provides children with a nurturing environment focused on education, yoga, wellness, values and character development.",
       },
-      { property: "og:title", content: "SVRST Trust — Real People. Real Impact." },
+      { property: "og:title", content: "Mathrudhama Children's Home — SVRST" },
       {
         property: "og:description",
-        content: "Education, healthcare, food support and women empowerment programmes with measurable community impact.",
+        content:
+          "Education, yoga, wellness, values and character development for children at Mathrudhama Children's Home.",
       },
     ],
   }),
@@ -35,128 +35,219 @@ function Index() {
     <>
       <HeroSlider />
 
-      {/* Impact numbers */}
-      <section className="relative overflow-hidden bg-secondary/40 py-16 sm:py-20">
-        <AnimatedBackground variant="grid" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {impactStats.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 100}>
-                <ImpactCounter value={stat.value} suffix={stat.suffix} label={stat.label} />
+      {/* Education Section - Editorial Design */}
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            <Reveal>
+              <div className="relative overflow-hidden rounded-3xl">
+                <img
+                  src={images.educationReading}
+                  alt="Students learning in classroom at SVRST"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
+            </Reveal>
+            <div>
+              <SectionHeading
+                align="left"
+                eyebrow="Education"
+                title="Education That Shapes More Than a Career"
+                description="Learning support, school materials, coaching and mentoring so children stay in education and progress with confidence."
+              />
+              <Reveal delay={200} className="mt-8">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  We believe education is the foundation for confidence, choice and a brighter
+                  future. Our approach goes beyond academics to cultivate critical thinking,
+                  creativity and character.
+                </p>
               </Reveal>
-            ))}
+              <Reveal delay={300} className="mt-8">
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/education">
+                    Learn More <ArrowRight />
+                  </Link>
+                </Button>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Mission */}
+      {/* Yoga Section - Image-Led Horizontal */}
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            <div className="order-2 lg:order-1">
+              <SectionHeading
+                align="left"
+                eyebrow="Yoga & Wellness"
+                title="Balance. Discipline. Mind-Body Connection"
+                description="Yoga practice for physical flexibility, mental clarity, discipline and healthy lifestyle."
+              />
+              <Reveal delay={200} className="mt-8">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Yoga is integral to our approach to child development. Through regular practice,
+                  students develop physical fitness, mental clarity, and the discipline that serves
+                  them in all aspects of life.
+                </p>
+              </Reveal>
+              <Reveal delay={300} className="mt-8">
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/dhyana-yoga">
+                    Learn More <ArrowRight />
+                  </Link>
+                </Button>
+              </Reveal>
+            </div>
+            <Reveal className="order-1 lg:order-2">
+              <div className="relative overflow-hidden rounded-3xl">
+                <img
+                  src={images.yogaMeditation}
+                  alt="Students practicing yoga at SVRST"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section - Editorial */}
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            <Reveal>
+              <div className="relative overflow-hidden rounded-3xl">
+                <img
+                  src={images.culturalActivity}
+                  alt="Students learning values and culture at SVRST"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
+            </Reveal>
+            <div>
+              <SectionHeading
+                align="left"
+                eyebrow="Values & Culture"
+                title="Rooted in Values. Grounded in Culture."
+                description="Devotional learning, Indian cultural values, respect, compassion, gratitude and self-awareness."
+              />
+              <Reveal delay={200} className="mt-8">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  We nurture character alongside academics. Through cultural learning, devotional
+                  practices and value-based education, children develop respect, compassion,
+                  gratitude and self-awareness.
+                </p>
+              </Reveal>
+              <Reveal delay={300} className="mt-8">
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/about/mission">
+                    Explore Our Mission <ArrowRight />
+                  </Link>
+                </Button>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story Section */}
+      <section className="bg-secondary/40 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            <div>
+              <SectionHeading
+                align="left"
+                eyebrow="Our Story"
+                title="A Trust Built Around Children and Their Futures"
+                description={org.mission}
+              />
+              <Reveal delay={200} className="mt-8">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  SVRST began with a simple commitment: to provide children with a nurturing
+                  environment where they could grow with dignity, confidence and purpose. Today, we
+                  continue that mission through education, dhyana, yoga, sports and values-based
+                  learning.
+                </p>
+              </Reveal>
+              <Reveal delay={300} className="mt-8">
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/about/svrst-trust">
+                    Read Our Story <ArrowRight />
+                  </Link>
+                </Button>
+              </Reveal>
+            </div>
+            <Reveal>
+              <div className="relative overflow-hidden rounded-3xl">
+                <img
+                  src={images.ourStory}
+                  alt="Our story at SVRST"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <VideoSection />
+
+      {/* Achievements Section */}
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Who we are"
-            title="Support that begins with listening"
-            description={org.mission}
-          >
-            <Button asChild size="lg">
-              <Link to="/about/svrst-trust">
-                About SVRST Trust <ArrowRight />
+            align="center"
+            eyebrow="Achievements"
+            title="Celebrating Growth and Success"
+            description="Academic achievements, sports accomplishments, cultural participation and personal development milestones."
+          />
+          <Reveal delay={200} className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl">
+              <img
+                src={images.achievements}
+                alt="Student achievements at SVRST"
+                width={1200}
+                height={600}
+                className="w-full object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={300} className="mt-8 text-center">
+            <Button asChild variant="outline" size="lg">
+              <Link to="/about/achievements">
+                View Achievements <ArrowRight />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/about/mission">Our Mission & Vision</Link>
-            </Button>
-          </SectionHeading>
+          </Reveal>
         </div>
       </section>
 
-      {/* Causes */}
-      <section className="bg-secondary/40 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Our work"
-            title="Four focus areas, one shared goal"
-            description="Each programme is designed with the community it serves, and measured by what actually changes for families."
-          />
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {causes.map((cause, i) => (
-              <CauseCard key={cause.slug} cause={cause} delay={i * 90} showDonate />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why trust us */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Why trust us" title="Accountable in the details" />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {whyTrustUs.map((item, i) => (
-              <FeatureCard key={item.title} title={item.title} body={item.body} Icon={getIcon(item.icon)} delay={i * 80} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stories */}
-      <section className="bg-secondary/40 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Success stories"
-            title="Change, one household at a time"
-            description="Names and details are shared with consent and kept respectful of privacy."
-          />
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {stories.slice(0, 2).map((story, i) => (
-              <StoryCard key={story.name} story={story} delay={i * 100} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Get involved */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Get involved" title="There is a way for everyone to help" />
-          <div className="mt-14 grid gap-6 sm:grid-cols-3">
-            {[
-              { title: "Donate", body: "Fund meals, learning materials, health camps and skills training.", to: "/donate", icon: HandHeart },
-              { title: "Volunteer", body: "Give your time and skills alongside our community teams.", to: "/get-involved/volunteer", icon: Users },
-              { title: "Partner", body: "Bring your organisation's CSR into long-term community work.", to: "/get-involved/corporate-partnership", icon: HeartHandshake },
-            ].map((item, i) => (
-              <Reveal key={item.title} delay={i * 90} className="h-full">
-                <div className="flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift">
-                  <span className="grid size-12 place-items-center rounded-2xl gradient-navy text-primary-foreground">
-                    <item.icon className="size-5" />
-                  </span>
-                  <h3 className="mt-5 font-display text-xl font-semibold">{item.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-                  <Button asChild variant="outline" className="mt-6 self-start">
-                    <Link to={item.to as never}>
-                      Learn more <ArrowRight />
-                    </Link>
-                  </Button>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Donation CTA */}
-      <section className="relative isolate overflow-hidden gradient-navy py-20 sm:py-28">
+      {/* Registration CTA */}
+      <section className="relative isolate overflow-hidden gradient-forest py-20 sm:py-28">
         <AnimatedBackground variant="orbs" className="text-primary-foreground" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <SectionHeading
             tone="dark"
-            eyebrow="Your support matters"
-            title="A small monthly gift changes a child's whole year"
-            description="Every contribution goes into programme delivery — meals, learning support, health camps and skills training."
+            eyebrow="Join Our Community"
+            title="Be Part of Something Meaningful"
+            description="Register to learn more about SVRST programmes, volunteer opportunities, or to request support."
           >
-            <Button asChild variant="donate" size="xl">
+            <Button asChild variant="leaf" size="xl">
               <Link to="/donate">Donate Now</Link>
             </Button>
             <Button asChild variant="hero" size="xl">
-              <Link to="/get-involved/membership">Become a Member</Link>
+              <Link to="/volunteer-registration">Volunteer</Link>
             </Button>
           </SectionHeading>
         </div>

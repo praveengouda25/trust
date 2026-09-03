@@ -16,40 +16,40 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    image: images.education,
-    alt: "Students reading together with their teacher in a community classroom",
+    image: images.hero1,
+    alt: "SVRST children learning together",
+    eyebrow: "Welcome",
+    headline: "A steady foundation for a wider future",
+    text: "Where education meets values, discipline and inner growth for children to flourish with confidence.",
+    cta: { label: "Explore Education", to: "/education" },
+  },
+  {
+    image: images.hero2,
+    alt: "SVRST students growing through education",
     eyebrow: "Education",
-    headline: "Empowering Lives Through Education",
-    text: "Creating opportunities for children and communities to learn, grow and build a better future.",
-    cta: { label: "Explore Our Work", to: "/work" },
+    headline: "Learning with care and purpose",
+    text: "Support, mentoring and opportunity help children stay curious, capable and connected to their future.",
+    cta: { label: "Our Education", to: "/education" },
   },
   {
-    image: images.healthcare,
-    alt: "A doctor checking an elderly woman's blood pressure at a community health camp",
-    eyebrow: "Healthcare",
-    headline: "Healthcare Within Reach",
-    text: "Working to make essential healthcare and support accessible to vulnerable communities.",
-    cta: { label: "Our Healthcare Work", to: "/work/healthcare" },
+    image: images.hero3,
+    alt: "Students practicing yoga asanas at SVRST",
+    eyebrow: "Yoga & Wellness",
+    headline: "Balance. Discipline. Mind-Body Connection.",
+    text: "Yoga practice for physical flexibility, mental clarity, discipline and healthy lifestyle.",
+    cta: { label: "Explore Yoga", to: "/dhyana-yoga" },
   },
   {
-    image: images.food,
-    alt: "Volunteers distributing meals and grocery kits to families",
-    eyebrow: "Food Support",
-    headline: "No One Should Go Hungry",
-    text: "Providing essential food support and standing with families during difficult times.",
-    cta: { label: "Support This Cause", to: "/donate" },
-  },
-  {
-    image: images.women,
-    alt: "Women learning tailoring skills in a training workshop",
-    eyebrow: "Women Empowerment",
-    headline: "Empowering Women. Strengthening Communities.",
-    text: "Creating pathways toward confidence, independence and sustainable livelihoods.",
-    cta: { label: "Learn More", to: "/work/women-empowerment" },
+    image: images.hero4,
+    alt: "SVRST young people taking part in community activity",
+    eyebrow: "Community",
+    headline: "Growing stronger together",
+    text: "Shared experiences build confidence, character and the sense of belonging every child deserves.",
+    cta: { label: "Our Mission", to: "/about/mission" },
   },
 ];
 
-const INTERVAL = 6500;
+const INTERVAL = 2000;
 
 export function HeroSlider() {
   const [index, setIndex] = useState(0);
@@ -70,9 +70,9 @@ export function HeroSlider() {
 
   return (
     <section
-      className="relative isolate flex min-h-[92dvh] items-end overflow-hidden bg-navy pb-16 pt-32 sm:pb-24"
+      className="relative isolate flex min-h-[92dvh] items-end overflow-hidden bg-forest pb-16 pt-32 sm:pb-24"
       aria-roledescription="carousel"
-      aria-label="SVRST Trust programmes"
+      aria-label="SVRST programmes"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => {
@@ -103,8 +103,8 @@ export function HeroSlider() {
             loading={i === 0 ? "eager" : "lazy"}
             className={cn("size-full object-cover", i === index && "ken-burns")}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/25" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/70 to-navy/25" />
+          <div className="absolute inset-0 bg-gradient-to-r from-forest/80 via-transparent to-transparent" />
         </div>
       ))}
 
@@ -113,10 +113,10 @@ export function HeroSlider() {
           {slides.map((slide, i) =>
             i === index ? (
               <div key={slide.headline}>
-                <p className="eyebrow animate-in fade-in slide-in-from-bottom-2 text-ember duration-700">
+                <p className="eyebrow animate-in fade-in slide-in-from-bottom-2 text-saffron duration-700">
                   {slide.eyebrow}
                 </p>
-                <h1 className="mt-4 animate-in fade-in text-4xl leading-[1.05] text-primary-foreground text-balance-tight duration-700 slide-in-from-bottom-4 sm:text-5xl lg:text-6xl">
+                <h1 className="mt-4 text-4xl leading-[1.05] text-primary-foreground text-balance-tight sm:text-5xl lg:text-6xl">
                   {slide.headline}
                 </h1>
                 <p className="mt-5 max-w-xl animate-in fade-in text-base leading-relaxed text-primary-foreground/80 delay-150 duration-700 slide-in-from-bottom-4 sm:text-lg">
@@ -137,10 +137,20 @@ export function HeroSlider() {
 
         <div className="mt-12 flex items-center gap-4">
           <div className="flex gap-2">
-            <Button variant="hero" size="icon" aria-label="Previous slide" onClick={() => go(index - 1)}>
+            <Button
+              variant="hero"
+              size="icon"
+              aria-label="Previous slide"
+              onClick={() => go(index - 1)}
+            >
               <ArrowLeft className="size-4" />
             </Button>
-            <Button variant="hero" size="icon" aria-label="Next slide" onClick={() => go(index + 1)}>
+            <Button
+              variant="hero"
+              size="icon"
+              aria-label="Next slide"
+              onClick={() => go(index + 1)}
+            >
               <ArrowRight className="size-4" />
             </Button>
           </div>
@@ -158,7 +168,9 @@ export function HeroSlider() {
                 <span
                   className={cn(
                     "block h-1 w-full rounded-full transition-colors",
-                    i === index ? "bg-ember" : "bg-primary-foreground/30 group-hover:bg-primary-foreground/60",
+                    i === index
+                      ? "bg-ember"
+                      : "bg-primary-foreground/30 group-hover:bg-primary-foreground/60",
                   )}
                 />
               </button>

@@ -1,0 +1,126 @@
+-- Security and Visitor Management Tables
+-- This migration creates tables for visitor management, student gate passes, and security tracking
+
+-- Visitors table (only create if not exists to avoid conflicts)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'visitors' AND table_schema = 'public') THEN
+    CREATE TABLE public.visitors (
+      id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      branch_id uuid NOT NULL REFERENCES public.branches(id) ON DELETE CASCADE,
+      visitor_name text NOT NULL,
+      visitor_phone text,
+      visitor_email text,
+      visitor_address text,
+      id_proof_type text, -- Aadhaar, PAN, Driving License, etc.
+      id_proof_number text,
+      id_proof_url text, -- Photo of ID proof
+      visitor_photo_url text, -- Photo of visitor
+      purpose_of_visit text NOT NULL,
+      person_to_meet text NOT NULL,
+      person_type text, -- student, teacher, staff, other
+      relation text,
+      vehicle_number text,
+      check_in_time timestamptz NOT NULL DEFAULT now(),
+      check_out_time timestamptz,
+      approved_by uuid REFERENCES public.profiles(id),
+      approval_status text NOT NULL DEFAULT 'pending', -- pending, approved, rejected
+      notes text,
+      created_at timestamptz NOT NULL DEFAULT now(),
+      updated_at timestamptz NOT NULL DEFAULT now(),
+      created_by uuid REFERENCES public.profiles(id),
+      deleted_at timestamptz
+    );
+    CREATE INDEX idx_visitors_branch ON public.visitors(branch_id) WHERE deleted_at IS NULL;
+    CREATE INDEX idx_visitors_checkin ON public.visitors(check_in_time) WHERE deleted_at IS NULL;
+    CREATE INDEX idx_visitors_status ON public.visitors(approval_status) WHERE deleted_at IS NULL;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON public.visitors TO authenticated;
+    GRANT ALL ON public.visitors TO service_role;
+    ALTER TABLE public.visitors ENABLE ROW LEVEL SECURITY;
+    CREATE POLICY "visitors_select" ON public.visitors FOR SELECT TO authenticated
+      USING (public.has_branch_access(auth.uid(), branch_id));
+    CREATE POLICY "visitors_write" ON public.visitors FOR ALL TO authenticated
+      USING (public.can_manage_branch_ops(auth.uid(), branch_id))
+      WITH CHECK (public.can_manage_branch_ops(auth.uid(), branch_id));
+  END IF;
+END $$;
+
+-- Student Gate Pass table
+CREATE TABLE IF NOT EXISTS public.student_gate_passes (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  branch_id uuid NOT NULL REFERENCES public.branches(id) ON DELETE CASCADE,
+  student_id uuid NOT NULL REFERENCES public.students(id) ON DELETE CASCADE,
+  hostel_id uuid REFERENCES public.hostels(id) ON DELETE SET NULL,
+  room_id uuid REFERENCES public.rooms(id) ON DELETE SET NULL,
+  bed_id uuid REFERENCES public.beds(id) ON DELETE SET NULL,
+  purpose text NOT NULL,
+  out_time timestamptz NOT NULL,
+  expected_return_time timestamptz,
+  actual_return_time timestamptz,
+  approved_by uuid REFERENCES public.profiles(id),
+  gate_security_name text,
+  status text NOT NULL DEFAULT 'pending', -- pending, approved, out, returned, late_return, rejected
+  is_late_return boolean DEFAULT false,
+  remarks text,
+  qr_code_url text, -- QR code for gate pass
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  created_by uuid REFERENCES public.profiles(id),
+  deleted_at timestamptz
+);
+CREATE INDEX idx_gate_passes_branch ON public.student_gate_passes(branch_id) WHERE deleted_at IS NULL;
+CREATE INDEX idx_gate_passes_student ON public.student_gate_passes(student_id) WHERE deleted_at IS NULL;
+CREATE INDEX idx_gate_passes_status ON public.student_gate_passes(status) WHERE deleted_at IS NULL;
+CREATE INDEX idx_gate_passes_out_time ON public.student_gate_passes(out_time) WHERE deleted_at IS NULL;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.student_gate_passes TO authenticated;
+GRANT ALL ON public.student_gate_passes TO service_role;
+ALTER TABLE public.student_gate_passes ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "gate_passes_select" ON public.student_gate_passes FOR SELECT TO authenticated
+  USING (public.has_branch_access(auth.uid(), branch_id));
+CREATE POLICY "gate_passes_write" ON public.student_gate_passes FOR ALL TO authenticated
+  USING (public.can_manage_branch_ops(auth.uid(), branch_id))
+  WITH CHECK (public.can_manage_branch_ops(auth.uid(), branch_id));
+
+-- Security Alerts table
+CREATE TABLE IF NOT EXISTS public.security_alerts (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  branch_id uuid NOT NULL REFERENCES public.branches(id) ON DELETE CASCADE,
+  alert_type text NOT NULL, -- visitor_arrived, student_left, student_returned, late_return, emergency, etc.
+  alert_level text NOT NULL DEFAULT 'info', -- info, warning, critical
+  title text NOT NULL,
+  description text,
+  related_entity_type text, -- visitor, student, gate_pass
+  related_entity_id uuid,
+  is_resolved boolean DEFAULT false,
+  resolved_at timestamptz,
+  resolved_by uuid REFERENCES public.profiles(id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  created_by uuid REFERENCES public.profiles(id),
+  deleted_at timestamptz
+);
+CREATE INDEX idx_security_alerts_branch ON public.security_alerts(branch_id) WHERE deleted_at IS NULL;
+CREATE INDEX idx_security_alerts_type ON public.security_alerts(alert_type) WHERE deleted_at IS NULL;
+CREATE INDEX idx_security_alerts_resolved ON public.security_alerts(is_resolved) WHERE deleted_at IS NULL;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.security_alerts TO authenticated;
+GRANT ALL ON public.security_alerts TO service_role;
+ALTER TABLE public.security_alerts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "security_alerts_select" ON public.security_alerts FOR SELECT TO authenticated
+  USING (public.has_branch_access(auth.uid(), branch_id));
+CREATE POLICY "security_alerts_write" ON public.security_alerts FOR ALL TO authenticated
+  USING (public.can_manage_branch_ops(auth.uid(), branch_id))
+  WITH CHECK (public.can_manage_branch_ops(auth.uid(), branch_id));
+
+-- Updated trigger for updated_at
+CREATE OR REPLACE FUNCTION public.handle_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER visitors_updated_at BEFORE UPDATE ON public.visitors
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+CREATE TRIGGER gate_passes_updated_at BEFORE UPDATE ON public.student_gate_passes
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();

@@ -20,7 +20,7 @@ export function PageHero({
   className?: string;
 }) {
   return (
-    <section className={cn("relative isolate overflow-hidden gradient-navy pb-16 pt-32 sm:pb-24 sm:pt-40", className)}>
+    <section className={cn("relative isolate overflow-hidden gradient-forest pb-16 pt-32 sm:pb-24 sm:pt-40", className)}>
       {image && (
         <>
           <img

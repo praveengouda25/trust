@@ -1,42 +1,40 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ChevronDown, Menu, X, Heart } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ERP_AUTH_URL } from "@/lib/api";
 
 type NavItem = { label: string; to: string; children?: { label: string; to: string }[] };
 
 export const navigation: NavItem[] = [
   { label: "Home", to: "/" },
   {
-    label: "About Us",
+    label: "About",
     to: "/about",
     children: [
       { label: "About SVRST", to: "/about/svrst-trust" },
       { label: "Our Mission", to: "/about/mission" },
       { label: "Our Journey", to: "/about/journey" },
-      { label: "Our Team", to: "/about/team" },
       { label: "Our Achievements", to: "/about/achievements" },
     ],
   },
   {
-    label: "Our Work",
-    to: "/work",
+    label: "Education",
+    to: "/education",
     children: [
-      { label: "Education", to: "/work/education" },
-      { label: "Healthcare", to: "/work/healthcare" },
-      { label: "Food Support", to: "/work/food-support" },
-      { label: "Women Empowerment", to: "/work/women-empowerment" },
+      { label: "Education", to: "/education" },
+      { label: "Dhyana & Yoga", to: "/dhyana-yoga" },
+      { label: "Sports", to: "/sports" },
     ],
   },
   {
     label: "Get Involved",
-    to: "/get-involved",
+    to: "/volunteer-registration",
     children: [
-      { label: "Request Help", to: "/get-involved/request-help" },
-      { label: "Volunteer With Us", to: "/get-involved/volunteer" },
-      { label: "Become a Member", to: "/get-involved/membership" },
-      { label: "Corporate Partnership", to: "/get-involved/corporate-partnership" },
+      { label: "Volunteer Registration", to: "/volunteer-registration" },
+      { label: "Request Help", to: "/request-help" },
+      { label: "Corporate Partnership", to: "/corporate-partnership" },
     ],
   },
   {
@@ -45,11 +43,11 @@ export const navigation: NavItem[] = [
     children: [
       { label: "Upcoming Events", to: "/events/upcoming" },
       { label: "Past Events", to: "/events/past" },
-      { label: "Events Gallery", to: "/events/gallery" },
-      { label: "Register for Event", to: "/events/register" },
+      { label: "Gallery", to: "/events/gallery" },
     ],
   },
   { label: "Contact", to: "/contact" },
+  { label: "Donation", to: "/donate" },
 ];
 
 export function Navbar() {
@@ -77,15 +75,19 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        solid
-          ? "border-b border-border/70 bg-background/85 backdrop-blur-xl"
-          : "bg-transparent",
+        solid ? "border-b border-border/70 bg-background/85 backdrop-blur-xl" : "bg-transparent",
       )}
     >
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link to="/" className="group flex items-center gap-3" aria-label="SVRST Trust home">
-          <span className="grid size-11 place-items-center rounded-2xl gradient-navy text-primary-foreground shadow-soft">
-            <Heart className="size-5" strokeWidth={2.2} />
+        <Link to="/" className="group flex items-center gap-3" aria-label="SVRST home">
+          <span className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-primary-foreground/95 shadow-soft ring-1 ring-black/5">
+            <img
+              src="/assets/images/svrst-logo.png"
+              alt="SVRST"
+              width="48"
+              height="48"
+              className="size-full object-cover"
+            />
           </span>
           <span className="leading-tight">
             <span
@@ -94,7 +96,7 @@ export function Navbar() {
                 solid ? "text-foreground" : "text-primary-foreground",
               )}
             >
-              SVRST Trust
+              SVRST
             </span>
             <span
               className={cn(
@@ -102,7 +104,7 @@ export function Navbar() {
                 solid ? "text-accent" : "text-primary-foreground/70",
               )}
             >
-              Social Impact
+              Mathrudhama Children's Village
             </span>
           </span>
         </Link>
@@ -110,24 +112,29 @@ export function Navbar() {
         {/* Desktop navigation */}
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {navigation.map((item) => {
-            const active = pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
+            const active =
+              pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
             return (
               <div key={item.to} className="group relative">
                 <Link
                   to={item.to}
                   className={cn(
                     "flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
-                    solid
-                      ? active
-                        ? "text-accent"
-                        : "text-foreground/80 hover:text-accent"
-                      : active
-                        ? "text-ember"
-                        : "text-primary-foreground/85 hover:text-primary-foreground",
+                    item.label === "Donation"
+                      ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                      : solid
+                        ? active
+                          ? "text-accent"
+                          : "text-foreground/80 hover:text-accent"
+                        : active
+                          ? "text-saffron"
+                          : "text-primary-foreground/85 hover:text-primary-foreground",
                   )}
                 >
                   {item.label}
-                  {item.children && <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180" />}
+                  {item.children && (
+                    <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180" />
+                  )}
                 </Link>
                 {item.children && (
                   <div className="invisible absolute left-0 top-full w-60 translate-y-2 pt-2 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
@@ -150,8 +157,13 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button asChild variant="donate" size="lg" className="hidden sm:inline-flex">
-            <Link to="/donate">Donate Now</Link>
+          <Button
+            asChild
+            variant={solid ? "outline" : "hero"}
+            size="sm"
+            className="hidden sm:inline-flex"
+          >
+            <a href={ERP_AUTH_URL}>Login</a>
           </Button>
           <Button
             variant={solid ? "ghost" : "hero"}
@@ -178,7 +190,10 @@ export function Navbar() {
             {navigation.map((item) => (
               <li key={item.to} className="border-b border-border/60 pb-1 last:border-0">
                 <div className="flex items-center justify-between">
-                  <Link to={item.to} className="block flex-1 py-3 text-base font-medium text-foreground">
+                  <Link
+                    to={item.to}
+                    className="block flex-1 py-3 text-base font-medium text-foreground"
+                  >
                     {item.label}
                   </Link>
                   {item.children && (
@@ -190,7 +205,10 @@ export function Navbar() {
                       className="grid size-11 place-items-center rounded-full text-muted-foreground transition-colors hover:text-accent"
                     >
                       <ChevronDown
-                        className={cn("size-4 transition-transform", expanded === item.label && "rotate-180")}
+                        className={cn(
+                          "size-4 transition-transform",
+                          expanded === item.label && "rotate-180",
+                        )}
                       />
                     </button>
                   )}
@@ -216,10 +234,15 @@ export function Navbar() {
                 )}
               </li>
             ))}
+            <li className="border-b border-border/60 pb-1 sm:hidden">
+              <a
+                href={ERP_AUTH_URL}
+                className="block py-3 text-base font-medium text-foreground"
+              >
+                Login
+              </a>
+            </li>
           </ul>
-          <Button asChild variant="donate" size="lg" className="mt-5 w-full">
-            <Link to="/donate">Donate Now</Link>
-          </Button>
         </nav>
       </div>
     </header>
